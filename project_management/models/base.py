@@ -1,0 +1,20 @@
+from django.db import models
+
+
+class BaseModel(models.Model):
+    """Consists of common attributes and methods."""
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        """defines BaseModel as an abstract base class."""
+        abstract = True
+
+    def __str__(self):
+        """Return a string represetation of the model instance.
+        Returns:
+            str: The value of the `name` field.
+        """
+        return self.name
