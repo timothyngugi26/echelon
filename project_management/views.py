@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login
 
 def index(request):
     form = AuthenticationForm()
@@ -8,8 +9,14 @@ def index(request):
 
 def login_view(request):
     if request.method  == 'POST':
-        pass
-    return render(request, 'project_management/login.html')
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')
+        else:
+            form = AuthenticationForm()
+        return render(request, 'project_management/login.html', {'form': form})
 
 def signup_view(request):
     if request.method == 'POST':
