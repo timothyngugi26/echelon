@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, intial-scale=1.0">
+		<title>Home - Echelon</title>
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href="{% static 'project_management/index.css' %}">
+	</head>
+	<body>
+		<header>
+			<h1>Welcome to Echelon: Project management simplified</h1>
+			<nav>
+				<ul>
+					<li><a href="{% url 'login' %}">Login</a></li>
+					<li><a href="{% url 'signup' %}">Sign Up</a></li>
+				</ul>
+			</nav>
+		</header>
+		
+		<main>
+			<section>
+				<h2>About Echelon</h2>
+				<p>Echelon Simplifies project management making it easy and efficient for basic use</p>
+			</section>
+
+			<section>
+				<h2>Get Started</h2>
+				<p>New to Echelon?, <a href="{% url 'signup' %}">Sign Up</a> to get started.</p>
+				<p>Already have an account!, <a href="{% url 'login' %}">Login</a> to access your dashboard.</p>
+			</section>
+		</main>
+
+		<footer>
+			<p>&copy; 2024 Echelon. All rights reserved.</p>
+		</footer>
+
+	</body>
+</html>
