@@ -1,6 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
+from django.shortcuts import render
+
+def profile_page(request):
+    return render(request, 'profile_page.html')
+
 
 def index(request):
     form = AuthenticationForm()
@@ -27,3 +32,7 @@ def task_list(request):
     # Fetch tasks from the database (assuming a Task model exists)
     tasks = Task.objects.all()
     return render(request, 'project_management/task_list.html', {'tasks': tasks})
+
+def profile_page(request):
+    return render(request, 'profile_page.html')
+

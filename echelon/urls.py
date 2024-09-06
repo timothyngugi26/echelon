@@ -23,3 +23,4 @@ urlpatterns = [
     path('project_management/', include('project_management.urls')),
     path('', views.index, name='home'),
 ]
+
