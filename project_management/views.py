@@ -36,3 +36,8 @@ def task_list(request):
 def profile_page(request):
     return render(request, 'profile_page.html')
 
+def projects_page(request):
+    return render(request, 'projects.html')
+
+def project_in_progress_page(request):
+    return render(request, 'project_in_progress.html')

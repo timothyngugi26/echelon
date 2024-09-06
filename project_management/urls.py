@@ -22,3 +22,7 @@ urlpatterns = [
     path('project_management/', include('project_management.urls')),
 ]
 
+urlpatterns = [
+    path('projects/', views.projects_page, name='projects'),  # Use the correct view function
+]
+
