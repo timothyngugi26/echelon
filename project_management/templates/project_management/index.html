@@ -23,10 +23,11 @@
 
 		<form method="post" action="{% url 'login' %}">
 			{% csrf_token %}
-			<h2>Login / Sign Up</h2>
+			<h2>Login</h2>
 			{{ form.as_p }}
 			<button type="submit">Login</button>
 		</form>
+		<p>Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
 
 		<section id="about">
 			<h3>About Echelon</h3>
