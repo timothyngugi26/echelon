@@ -24,14 +24,14 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('dashboard')
+                return redirect('profile')
             else:
                 return redirect('signup')
         else:
-            return render(request, 'project_management/login.html', {'form': form})
+            form.add_error(None, 'Invalid username or password')
     else:
         form = AuthenticationForm()
-        return render(request, 'project_management/login.html', {'form': form})
+        return render(request, 'registration/login.html', {'form': form})
 
 def signup_view(request):
     if request.method == 'POST':

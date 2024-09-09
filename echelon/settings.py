@@ -66,7 +66,7 @@ ROOT_URLCONF = 'echelon.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'prooject_management' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -161,3 +161,10 @@ TEMPLATES = [
 
 STATIC_URL = '/static/'
 
+# Redirect URL after a successful login
+LOGIN_REDIRECT_URL = '/profile/'
+
+# Redirect URL after a sucessful logout
+LOGOUT_URL  = '/'
+
+LOGIN_URL = 'login'
