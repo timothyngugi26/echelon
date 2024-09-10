@@ -17,10 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from project_management import views
+from django.conf import settings
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('project_management/', include('project_management.urls')),
     path('', views.index, name='home'),
-]
-
+    ]
+    
+if settings.DEBUG:
+        import debug_toolbar
+        urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]
