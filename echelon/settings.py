@@ -148,7 +148,7 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redirect URL after a successful login
-LOGIN_REDIRECT_URL = '/profile/'
+LOGIN_REDIRECT_URL = '/project_management/profile/'
 
 # Redirect URL after a sucessful logout
 LOGOUT_URL  = '/'

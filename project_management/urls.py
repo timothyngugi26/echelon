@@ -17,7 +17,7 @@ urlpatterns  = [
         path('accounts/', include('django.contrib.auth.urls')),
         # The profile page 
 
-        path('profile/', profile_page, name='profile_page'),
+        path('profile/',views.profile_page, name='profile_page'),
         path('project-in-progress/', views.project_in_progress_page, name='project_in_progress'),
         path('projects/', views.projects_page, name='projects'),
 ]
