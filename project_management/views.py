@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login as auth_login
 from django.shortcuts import render
+from django.contrib import messages
 from django.http import HttpResponse
+
 
 def profile_page(request):
     return render(request, 'profile_page.html')
@@ -36,11 +38,13 @@ def signup_view(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            auth_login(request, user)
+            messages.success(request, 'Account created successfully! Please login')
+            #return redirect('login')
+            #auth_login(request, user)
             # print("User signed up and logged in")
-            return redirect('profile_page')
+            return redirect('login')
         else:
-            print('Invalid form')
+            messages.error(request, 'Invalid form submission')
     else:
         form = UserCreationForm()
         
