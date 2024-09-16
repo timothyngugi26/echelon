@@ -4,9 +4,9 @@ from .models import Project, Milestone, Task
 from .forms import ProjectForm, MilestoneForm, TaskForm
 
 
-def project_list(request):
+def index(request):
     projects = Project.objects.filter(user=request.user)
-        return render(request, 'project_management/index.html', {'projects': projects})
+    return render(request, 'project_management/base.html', {'projects': projects})
 
 
 def task_list(request):
