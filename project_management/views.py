@@ -1,65 +1,37 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import authenticate, login as auth_login
 from django.shortcuts import render
-from django.contrib import messages
-from django.http import HttpResponse
+from django.contrib.auth import authenticate, login as auth_login
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from django.contrib.auth.models import User
+from .models import Task
 
+class CustomTokenObtainPairView(TokenObtainPairView):
+    pass
 
-def profile_page(request):
-    return render(request, 'profile_page.html')
-
-
-def index(request):
-     form = AuthenticationForm()
-     return render(request, 'project_management/index.html',  {'form': form})
-
-
-def login_view(request):
-    if request.method  == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('profile_page')
-            else:
-                form.add_error(None, 'Invalid Username or Password')
-    else:
-        form = AuthenticationForm()
-        return render(request, 'registration/login.html', {'form': form})
-
+@api_view(['POST'])
 def signup_view(request):
-    # print("Entering signup_view")
-    # return HttpResponse("The view works!")
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            messages.success(request, 'Account created successfully! Please login')
-            #return redirect('login')
-            #auth_login(request, user)
-            # print("User signed up and logged in")
-            return redirect('login')
+    username = request.data.get('username')
+    password = request.data.get('password')
+    if username and password:
+        try:
+            user = User.objects.create_user(username=username, password=password)
+            user.save()
+            return Response({'message': 'Account created successfully!'}, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            messages.error(request, 'Invalid form submission')
+            return Response({'error': 'Invalid data'}, status=status.HTTP_404_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def login_view(request):
+    username = request.data.get('username')
+    password = request.data.get('password')
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        auth_login(request, user)
+        return Response({'message': 'Logged in Successfully'}, status=status.HTTP_200_OK)
     else:
-        form = UserCreationForm()
-        
-    return render(request, 'project_management/signup.html', {'form': form})
-
-def task_list(request):
-    # Fetch tasks from the database (assuming a Task model exists)
-    tasks = Task.objects.all()
-    return render(request, 'project_management/task_list.html', {'tasks': tasks})
-
-def profile_page(request):
-    return render(request, 'project_management/profile_page.html')
-
-def projects_page(request):
-    return render(request, 'project_management/projects.html')
-
-def project_in_progress_page(request):
-    return render(request, 'project_management/project_in_progress.html')
+        return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_AUTHORIZED)

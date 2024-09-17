@@ -15,17 +15,28 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from project_management import views
 from django.conf import settings
-
+from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('project_management/', include('project_management.urls')),
-    path('', views.index, name='home'),
-    ]
+    path('api/', include('project_management.api_urls')),
+    re_path(r'^manifest.json$', TemplateView.as_view(template_name='manifest.json', content_type='application/json')),
+    re_path(r'^favicon.ico$', TemplateView.as_view(template_name='favicon.ico', content_type='image/vnd.microsoft.icon')),
+    re_path(r'^logo192.png$', TemplateView.as_view(template_name="logo192.png", content_type='image/png')),
+    re_path(r'^logo512.png$', TemplateView.as_view(template_name="logo512.png", content_type="image/png")),
+    path('', TemplateView.as_view(template_name='index.html')),
+
+    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     
 if settings.DEBUG:
-        import debug_toolbar
-        urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)
+    
+    import debug_toolbar
+    urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]
+
