@@ -3,8 +3,6 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib import messages
 from django.http import HttpResponse
-=======
-from django.shortcuts import render
 from django.contrib.auth import authenticate, login as auth_login
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status
@@ -12,7 +10,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
 from .models import Task
->>>>>>> d8d7ac46c02f657b86675ce8ff92d3f1755268be
+d8d7ac46c02f657b86675ce8ff92d3f1755268be
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     pass
