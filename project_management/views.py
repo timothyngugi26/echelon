@@ -72,6 +72,6 @@ def task_list(request):
     milestones = project.milestones.all
     tasks = Task.objects.filter(milestone__project=project)
     return render(request, 'project_management/task_list.html', {'project': project, 'milestones': milestones, 'tasks': tasks})
-=======
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_AUTHORIZED)
->>>>>>> d8d7ac46c02f657b86675ce8ff92d3f1755268be
+	d8d7ac46c02f657b86675ce8ff92d3f1755268be
+
