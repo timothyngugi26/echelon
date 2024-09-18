@@ -43,7 +43,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'debug_toolbar',
+    'rest_framework_simplejwt',
 ]
+
+REST_FRAMEWORK = {
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework_simplejwt.authentication.JWTAuthentication',
+            ),
+        }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -71,7 +78,7 @@ ROOT_URLCONF = 'echelon.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'project_management' / 'templates'],
+        'DIRS': [BASE_DIR / 'frontend' / 'project-management-frontend' / 'build'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -139,8 +146,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.co]m/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+        BASE_DIR / 'frontend' / 'project-management-frontend' / 'build' /'static',
+        BASE_DIR / 'frontend' / 'project-management-frontend' / 'build',
+        ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+import os
+STATICFILES_DIRS += [
+        os.path.join(BASE_DIR, 'frontend', 'project-management-frontend', 'build', 'static'),
+        os.path.join(BASE_DIR, 'frontend', 'project-management-frontend', 'build'),
+        ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
