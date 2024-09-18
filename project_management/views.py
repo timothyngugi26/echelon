@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login as auth_login
-from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponse
 
@@ -46,8 +45,7 @@ def signup_view(request):
         else:
             messages.error(request, 'Invalid form submission')
     else:
-        form = UserCreationForm()
-        
+        form = UserCreationForm() 
     return render(request, 'project_management/signup.html', {'form': form})
 
 def task_list(request):
@@ -63,3 +61,19 @@ def projects_page(request):
 
 def project_in_progress_page(request):
     return render(request, 'project_management/project_in_progress.html')
+from django.contrib.auth.decorators import login_required
+from .models import Project, Milestone, Task
+from .forms import ProjectForm, MilestoneForm, TaskForm
+
+
+def project_list(request):
+    projects = Project.objects.filter(user=request.user)
+    return render(request, 'project_management/index.html', {'projects': projects})
+
+
+def task_list(request):
+    # Fetch tasks from the database (assuming a Task model exists)
+    project = Project.object.get(pk=pk)
+    milestones = project.milestones.all
+    tasks = Task.objects.filter(milestone__project=project)
+    return render(request, 'project_management/task_list.html', {'project': project, 'milestones': milestones, 'tasks': tasks})
