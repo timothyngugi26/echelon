@@ -78,7 +78,7 @@ ROOT_URLCONF = 'echelon.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'frontend' / 'project-management-frontend' / 'build'],
+        'DIRS': [BASE_DIR / 'frontend' / 'project_management_frontend' / 'build'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -148,8 +148,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-        BASE_DIR / 'frontend' / 'project-management-frontend' / 'build' /'static',
-        BASE_DIR / 'frontend' / 'project-management-frontend' / 'build',
+        BASE_DIR / 'frontend' / 'project_management_frontend' / 'build' /'static',
+        BASE_DIR / 'frontend' / 'project_management_frontend' / 'build',
         ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
