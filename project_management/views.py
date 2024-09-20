@@ -1,4 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import authenticate, login as auth_login
+from django.contrib import messages
+from django.http import HttpResponse
 from django.contrib.auth import authenticate, login as auth_login
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status
@@ -8,7 +12,6 @@ from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
 from .models import Task, Project, Milestone
 from django.http import JsonResponse
-
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     pass
@@ -48,4 +51,5 @@ def login(request):
             'access': str(refresh.access_token)
         }, status=status.HTTP_200_OK)
     else:
+
         return JsonResponse({'error': 'Invalid credentials'}, status=status.HTTP_401_AUTHORIZED)

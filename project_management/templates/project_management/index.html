@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Home - Echelon</title>
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href="{% static 'project_management/styles.css' %}">
+	</head>
+	<body>
+		<header>
+			<h1>Welcome to Echelon</h1>
+		</header>
+		<div class="sidebar">
+		<ul>
+			<li><a href="{% url 'login' %}">Login</a></li>
+			<li><a href="{% url 'signup' %}">Sign Up</a></li> 
+			<li><a href="#about">About</a></li>
+			<li><a href="#team">Team</a></li>
+
+		</ul>
+		</div>
+
+		<form method="post" action="{% url 'login' %}">
+			{% csrf_token %}
+			<h2>Login</h2>
+			{{ form.as_p }}
+			<button type="submit">Login</button>
+		</form>
+		<p>Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+
+		<section id="about">
+			<h3>About Echelon</h3>
+			<p>Echelon is a simplified project management tool with amazing user experience and ease to use</p>
+		</section>
+		<section id="team">
+			<h3>your simplified project partner</h3>
+			<p>followup your project to completion.
+			<ul>Define your strategy to complete every task </ul>
+			<ul>analyse the necessary steps involved in your project</ul>
+			<ul>map your progress</ul>
+			</p>
+		</section>
+
+
+		<footer>
+			<p>&copy; 2024 Echelon. All rights reserved.</p>
+		</footer>
+
+	</body>
+</html>
+{% extends 'base.html' %}
+{% block content %}
+<h1>Your Projects</h1>
+<ul>
+    {% for project in projects %}
+        <li><a href="{% url 'project_detail' project.pk %}">{{ project.title }}</a></li>
+    {% endfor %}
+</ul>
+<a href="{% url 'project_create' %}">Add Project</a>
+{% endblock %}
