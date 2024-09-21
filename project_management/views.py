@@ -17,6 +17,10 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     pass
 
 @api_view(['POST'])
+def test_view(request):
+    return JsonResponse({"message": "POST request recieved"},status=status.HTTP_200_OK)
+
+@api_view(['POST'])
 def signup(request):
     username = request.data.get('username')
     password = request.data.get('password')
@@ -33,7 +37,7 @@ def signup(request):
             }, status=status.HTTP_201_CREATED) 
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-        else:
+        if not (username and password):
             return JsonResponse({'error': 'Invalid data'}, status=status.HTTP_404_BAD_REQUEST)
 
 
@@ -52,4 +56,4 @@ def login(request):
         }, status=status.HTTP_200_OK)
     else:
 
-        return JsonResponse({'error': 'Invalid credentials'}, status=status.HTTP_401_AUTHORIZED)
+        return JsonResponse({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)

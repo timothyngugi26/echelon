@@ -5,7 +5,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = '__all__'
-
+    
 class MilestoneSerializer(serializers.ModelSerializer):
     class Meta:
         model = Milestone

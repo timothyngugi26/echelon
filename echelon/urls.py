@@ -29,7 +29,7 @@ urlpatterns = [
     re_path(r'^favicon.ico$', TemplateView.as_view(template_name='favicon.ico', content_type='image/vnd.microsoft.icon')),
     re_path(r'^logo192.png$', TemplateView.as_view(template_name="logo192.png", content_type='image/png')),
     re_path(r'^logo512.png$', TemplateView.as_view(template_name="logo512.png", content_type="image/png")),
-    path('', TemplateView.as_view(template_name='index.html')),
+    re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name='index.html')),
 
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     

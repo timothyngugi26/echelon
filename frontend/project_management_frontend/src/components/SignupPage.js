@@ -19,7 +19,7 @@ function SignupPage () {
     e.preventDefault();
     setError(null);
 
-    fetch('http://127.0.0.1:8000/api/signup/', {
+    fetch('/api/signup/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
