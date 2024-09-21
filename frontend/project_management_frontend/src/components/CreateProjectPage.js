@@ -1,12 +1,31 @@
 import React, { useState } from 'react';
 import '../styles.css';
 
-function CreateProjectPage () {
+function CreateProjectPage() {
   const [projectName, setProjectName] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+      event.preventDefault();
+      const projectData = {
+	  name: projectName,
   };
+
+  fetch("/api/projects/", {
+     method: "POST",
+     headers: {
+       "Content-Type": "application/json",
+     },
+     body: JSON.stringify(projectData),
+   })
+     .then((response) => response.json())
+     .then((data) => {
+       console.log("Project created successfully", data);
+     })
+     .catch((error) => {
+       console.error("Error creating project:", error);
+     });
+  };
+
 
   return (
     <div className='create-project'>
