@@ -152,7 +152,7 @@ STATICFILES_DIRS = [
         BASE_DIR / 'frontend' / 'project_management_frontend' / 'build',
         ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'public')
 
 '''import os
 STATICFILES_DIRS += [

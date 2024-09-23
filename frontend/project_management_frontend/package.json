@@ -1,9 +1,9 @@
 {
-  "name": "project-management-frontend",
+  "name": "project_management_frontend",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://127.0.0.1:8000",
-  "homepage": "/static/",
+  "homepage": "/",
   "dependencies": {
     "@sideway/address": "^5.0.0",
     "@testing-library/jest-dom": "^6.5.0",
