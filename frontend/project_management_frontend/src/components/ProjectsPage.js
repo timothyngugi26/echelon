@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import '../ProjectsPage.css';
+
 
 function ProjectsPage () {
   const [projects, setProjects] = useState([]);
@@ -23,23 +25,28 @@ function ProjectsPage () {
       });
   }, []);
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loading-spinner">Loading...</div>;
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div className="error-message">Error: {error.message}</div>;
   }
 
   return (
-    <div>
-      <h1>Projects</h1>
-      <ul>
+    <div className="projects-container">
+      <h1 className="projects-title">Projects</h1>
+      {projects.length === 0? (
+        <p className="no-proojects">No projects Available. Start by creating a new   one!</p>
+       ) : (
+      <ul className="projects-list">
         {projects.map(project => (
-          <li key={project.id}>
-            {project.name} - {project.description}
+          <li key={project.id} className="project-item">
+             <h2>{project.name}</h2>
+             <p>{project.description}</p>
           </li>
         ))}
       </ul>
+     )}
     </div>
   );
 }

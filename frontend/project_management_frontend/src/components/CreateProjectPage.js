@@ -3,6 +3,7 @@ import '../styles.css';
 
 function CreateProjectPage() {
   const [projectName, setProjectName] = useState('');
+  const [message, setMessage] = useState(null);
 
   const handleSubmit = (event) => {
       event.preventDefault();
@@ -17,12 +18,12 @@ function CreateProjectPage() {
      },
      body: JSON.stringify(projectData),
    })
-     .then((response) => response.json())
-     .then((data) => {
-       console.log("Project created successfully", data);
+     .then((response) => {
+        setMessage("Project created successfully!");
+        setProjectName('');
      })
      .catch((error) => {
-       console.error("Error creating project:", error);
+       setMessage("Error creating project. Please try again.");
      });
   };
 
@@ -41,6 +42,7 @@ function CreateProjectPage() {
         />
         <button type='submit'>Create Project</button>
       </form>
+      {message && <div className="message">{message}</div>}
     </div>
   );
 }

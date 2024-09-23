@@ -75,4 +75,79 @@ body {
 	 margin: 10px 0;
 	 display: block;
  }
+
+ .create-project {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  max-width: 400px;
+  background-color: #f9f9f9;
+}
+
+.create-project h2 {
+  margin-bottom: 15px;
+  text-align: center;
+  color: #333;
+}
+
+.create-project input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.create-project button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.create-project button:hover {
+  background-color: #45a049;
+}
+
+.message {
+  margin-top: 10px;
+  color: green;
+  text-align: center;
+}
+.project-list-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.project-list {
+  list-style: none;
+  padding: 0;
+}
+
+.project-item {
+  background-color: #e0e0e0;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.loading {
+  text-align: center;
+  font-size: 18px;
+  color: #888;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  font-size: 18px;
+}
+
  }
